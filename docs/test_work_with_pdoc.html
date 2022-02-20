@@ -24,7 +24,10 @@
         <h2>API Documentation</h2>
             <ul class="memberlist">
             <li>
-                    <a class="function" href="#print_message">print_message</a>
+                    <a class="function" href="#get_message">get_message</a>
+            </li>
+            <li>
+                    <a class="function" href="#get_alter_message">get_alter_message</a>
             </li>
     </ul>
 
@@ -45,42 +48,90 @@ test_work_with_pdoc    </h1>
                 
                         <details>
             <summary>View Source</summary>
-            <div class="pdoc-code codehilite"><pre><span></span><span class="k">def</span> <span class="nf">print_message</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">surname</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">rich</span> <span class="kn">import</span> <span class="nb">print</span> <span class="k">as</span> <span class="n">rprint</span>
+<span class="kn">from</span> <span class="nn">rich.console</span> <span class="kn">import</span> <span class="n">Console</span>
+<span class="kn">from</span> <span class="nn">rich.panel</span> <span class="kn">import</span> <span class="n">Panel</span>
+
+
+<span class="k">def</span> <span class="nf">get_message</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">surname</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    :param name:    is your name</span>
 <span class="sd">    :param surname: is your surname</span>
+<span class="sd">    :rtype string</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;name: </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> surname: </span><span class="si">{</span><span class="n">surname</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">name</span><span class="si">=}</span><span class="s2"> </span><span class="si">{</span><span class="n">surname</span><span class="si">=}</span><span class="s2">&quot;</span>
 
 
-<span class="n">print_message</span><span class="p">(</span><span class="s2">&quot;Алексей&quot;</span><span class="p">,</span> <span class="s2">&quot;Тимин&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">get_alter_message</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">surname</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    :param name:    is your name</span>
+<span class="sd">    :param surname: is your surname</span>
+<span class="sd">    :rtype string</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">surname</span><span class="si">=}</span><span class="s2"> </span><span class="si">{</span><span class="n">name</span><span class="si">=}</span><span class="s2">&quot;</span>
+
+
+<span class="n">console</span> <span class="o">=</span> <span class="n">Console</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">stderr</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="s2">&quot;white on blue&quot;</span><span class="p">)</span>
+<span class="n">console</span><span class="o">.</span><span class="n">print</span><span class="p">(</span><span class="n">get_message</span><span class="p">(</span><span class="s2">&quot;Алексей&quot;</span><span class="p">,</span> <span class="s2">&quot;Тимин&quot;</span><span class="p">))</span>
+<span class="n">console</span><span class="o">.</span><span class="n">print</span><span class="p">(</span><span class="n">Panel</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">get_alter_message</span><span class="p">(</span><span class="s1">&#39;Алексей&#39;</span><span class="p">,</span> <span class="s1">&#39;Тимин&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">border_style</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">))</span>
+<span class="n">console</span><span class="o">.</span><span class="n">rule</span><span class="p">(</span><span class="s2">&quot;[bold red]Chapter 2&quot;</span><span class="p">)</span>
 </pre></div>
 
         </details>
 
             </section>
-                <section id="print_message">
-                            <div class="attr function"><a class="headerlink" href="#print_message">#&nbsp;&nbsp</a>
+                <section id="get_message">
+                            <div class="attr function"><a class="headerlink" href="#get_message">#&nbsp;&nbsp</a>
 
         
             <span class="def">def</span>
-            <span class="name">print_message</span><span class="signature">(name: str, surname: str) -&gt; None</span>:
+            <span class="name">get_message</span><span class="signature">(name: str, surname: str) -&gt; str</span>:
     </div>
 
             <details>
             <summary>View Source</summary>
-            <div class="pdoc-code codehilite"><pre><span></span><span class="k">def</span> <span class="nf">print_message</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">surname</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span class="k">def</span> <span class="nf">get_message</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">surname</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    :param name:    is your name</span>
 <span class="sd">    :param surname: is your surname</span>
+<span class="sd">    :rtype string</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;name: </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> surname: </span><span class="si">{</span><span class="n">surname</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">name</span><span class="si">=}</span><span class="s2"> </span><span class="si">{</span><span class="n">surname</span><span class="si">=}</span><span class="s2">&quot;</span>
 </pre></div>
 
         </details>
 
             <div class="docstring"><p>:param name:    is your name
-:param surname: is your surname</p>
+:param surname: is your surname
+:rtype string</p>
+</div>
+
+
+                </section>
+                <section id="get_alter_message">
+                            <div class="attr function"><a class="headerlink" href="#get_alter_message">#&nbsp;&nbsp</a>
+
+        
+            <span class="def">def</span>
+            <span class="name">get_alter_message</span><span class="signature">(name: str, surname: str) -&gt; str</span>:
+    </div>
+
+            <details>
+            <summary>View Source</summary>
+            <div class="pdoc-code codehilite"><pre><span></span><span class="k">def</span> <span class="nf">get_alter_message</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">surname</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    :param name:    is your name</span>
+<span class="sd">    :param surname: is your surname</span>
+<span class="sd">    :rtype string</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">surname</span><span class="si">=}</span><span class="s2"> </span><span class="si">{</span><span class="n">name</span><span class="si">=}</span><span class="s2">&quot;</span>
+</pre></div>
+
+        </details>
+
+            <div class="docstring"><p>:param name:    is your name
+:param surname: is your surname
+:rtype string</p>
 </div>
 
 
