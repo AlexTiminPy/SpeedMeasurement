@@ -24,7 +24,7 @@
         <h2>API Documentation</h2>
             <ul class="memberlist">
             <li>
-                    <a class="function" href="#log_target">log_target</a>
+                    <a class="function" href="#print_target_text">print_target_text</a>
             </li>
             <li>
                     <a class="function" href="#calculate_result">calculate_result</a>
@@ -33,7 +33,7 @@
                     <a class="function" href="#get_color_for_accuracy">get_color_for_accuracy</a>
             </li>
             <li>
-                    <a class="function" href="#print_pressed_keys">print_pressed_keys</a>
+                    <a class="function" href="#add_pressed_keys_to_text">add_pressed_keys_to_text</a>
             </li>
             <li>
                     <a class="function" href="#main">main</a>
@@ -70,7 +70,7 @@ Measurement    </h1>
 <span class="n">console</span> <span class="o">=</span> <span class="n">Console</span><span class="p">()</span>
 
 
-<span class="k">def</span> <span class="nf">log_target</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="k">def</span> <span class="nf">print_target_text</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    print target for write</span>
 <span class="sd">    :return: None</span>
@@ -103,7 +103,7 @@ Measurement    </h1>
     <span class="k">return</span> <span class="s2">&quot;red&quot;</span>
 
 
-<span class="k">def</span> <span class="nf">print_pressed_keys</span><span class="p">(</span><span class="n">e</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">add_pressed_keys_to_text</span><span class="p">(</span><span class="n">e</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    asynс func for work with console write</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -114,7 +114,7 @@ Measurement    </h1>
 <span class="sd">        update console after next letter</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">system</span><span class="p">(</span><span class="s2">&quot;cls&quot;</span><span class="p">)</span>
-        <span class="n">log_target</span><span class="p">()</span>
+        <span class="n">print_target_text</span><span class="p">()</span>
         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;text: </span><span class="si">{</span><span class="n">text</span><span class="si">}</span><span class="s2">&lt;&quot;</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">e</span><span class="o">.</span><span class="n">event_type</span> <span class="o">==</span> <span class="s2">&quot;down&quot;</span><span class="p">:</span>
@@ -133,11 +133,11 @@ Measurement    </h1>
 
 
 <span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
-    <span class="n">log_target</span><span class="p">()</span>
+    <span class="n">print_target_text</span><span class="p">()</span>
 
     <span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
 
-    <span class="n">keyboard</span><span class="o">.</span><span class="n">hook</span><span class="p">(</span><span class="n">print_pressed_keys</span><span class="p">)</span>
+    <span class="n">keyboard</span><span class="o">.</span><span class="n">hook</span><span class="p">(</span><span class="n">add_pressed_keys_to_text</span><span class="p">)</span>
     <span class="n">keyboard</span><span class="o">.</span><span class="n">wait</span><span class="p">(</span><span class="s2">&quot;enter&quot;</span><span class="p">)</span>
 
     <span class="n">fin_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_time</span>
@@ -164,17 +164,17 @@ Measurement    </h1>
         </details>
 
             </section>
-                <section id="log_target">
-                            <div class="attr function"><a class="headerlink" href="#log_target">#&nbsp;&nbsp</a>
+                <section id="print_target_text">
+                            <div class="attr function"><a class="headerlink" href="#print_target_text">#&nbsp;&nbsp</a>
 
         
             <span class="def">def</span>
-            <span class="name">log_target</span><span class="signature">() -&gt; None</span>:
+            <span class="name">print_target_text</span><span class="signature">() -&gt; None</span>:
     </div>
 
             <details>
             <summary>View Source</summary>
-            <div class="pdoc-code codehilite"><pre><span></span><span class="k">def</span> <span class="nf">log_target</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span class="k">def</span> <span class="nf">print_target_text</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    print target for write</span>
 <span class="sd">    :return: None</span>
@@ -251,17 +251,17 @@ Measurement    </h1>
 
 
                 </section>
-                <section id="print_pressed_keys">
-                            <div class="attr function"><a class="headerlink" href="#print_pressed_keys">#&nbsp;&nbsp</a>
+                <section id="add_pressed_keys_to_text">
+                            <div class="attr function"><a class="headerlink" href="#add_pressed_keys_to_text">#&nbsp;&nbsp</a>
 
         
             <span class="def">def</span>
-            <span class="name">print_pressed_keys</span><span class="signature">(e)</span>:
+            <span class="name">add_pressed_keys_to_text</span><span class="signature">(e)</span>:
     </div>
 
             <details>
             <summary>View Source</summary>
-            <div class="pdoc-code codehilite"><pre><span></span><span class="k">def</span> <span class="nf">print_pressed_keys</span><span class="p">(</span><span class="n">e</span><span class="p">):</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span class="k">def</span> <span class="nf">add_pressed_keys_to_text</span><span class="p">(</span><span class="n">e</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    asynс func for work with console write</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -272,7 +272,7 @@ Measurement    </h1>
 <span class="sd">        update console after next letter</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">system</span><span class="p">(</span><span class="s2">&quot;cls&quot;</span><span class="p">)</span>
-        <span class="n">log_target</span><span class="p">()</span>
+        <span class="n">print_target_text</span><span class="p">()</span>
         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;text: </span><span class="si">{</span><span class="n">text</span><span class="si">}</span><span class="s2">&lt;&quot;</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">e</span><span class="o">.</span><span class="n">event_type</span> <span class="o">==</span> <span class="s2">&quot;down&quot;</span><span class="p">:</span>
@@ -308,11 +308,11 @@ Measurement    </h1>
             <details>
             <summary>View Source</summary>
             <div class="pdoc-code codehilite"><pre><span></span><span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
-    <span class="n">log_target</span><span class="p">()</span>
+    <span class="n">print_target_text</span><span class="p">()</span>
 
     <span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
 
-    <span class="n">keyboard</span><span class="o">.</span><span class="n">hook</span><span class="p">(</span><span class="n">print_pressed_keys</span><span class="p">)</span>
+    <span class="n">keyboard</span><span class="o">.</span><span class="n">hook</span><span class="p">(</span><span class="n">add_pressed_keys_to_text</span><span class="p">)</span>
     <span class="n">keyboard</span><span class="o">.</span><span class="n">wait</span><span class="p">(</span><span class="s2">&quot;enter&quot;</span><span class="p">)</span>
 
     <span class="n">fin_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_time</span>
