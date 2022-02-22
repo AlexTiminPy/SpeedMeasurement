@@ -1,78 +1,75 @@
-import keyboard
-from os import system
+import msvcrt
+import sys
 import time
-from rich.panel import Panel
+from os import system
 from rich.console import Console
-from fuzzywuzzy import fuzz
 import argparse
 
-console = Console()
-target_text_ = ""
-inp_text_ = ""
 
-
-def update_console(target_text, inp_text) -> None:
-    """
-    update console after next letter
-    """
+def update_console(console, text_, target_text_, start, SPM_):
     system("cls")
-    print(f"вам нужно напечатать: \n{target_text}")
-    console.rule("[bold red]Lets write!!!", align="left")
-    print(f"text: {inp_text}<")
+
+    console.print(f"{SPM_} {time.time() - start}")
+    print_different_in_texts(console, text_, target_text_)
 
 
-def calculate_symbol_per_minute(text, fin_time) -> int:
-    """
-    calculate symbol per minute and accuracy of text
-    :param fin_time: time if fin write
-    """
-    SPM = len(text) / fin_time * 60
+def print_different_in_texts(console, text, target_text):
+    console.print(target_text)
+
+    if not text:
+        return
+
+    for i, t in enumerate(text):
+        try:
+            if t == target_text[i]:
+                console.print(f"[green]{t}", end="")
+            else:
+                console.print(f"[red]{t}", end="")
+        except:
+            console.print(f"[red]{t}", end="")
+
+
+def calculate_SPM(target_text_, time_):
+    SPM = len(target_text_) / max(time_, 1) * 60
 
     return SPM
 
 
-def calculate_accuracy(target_text, inp_text) -> int:
-    """
-    calculate accuracy of text
-    """
-    accuracy = fuzz.ratio(target_text, inp_text)
-    return accuracy
+def speed_measurement(console, target_text_):
+    SPM_ = 0
+    text_ = ''
+
+    layout = \
+        ("""!-()qwertyuiop[]asdfghjkl;'zxcvbnm,./QWERTYUIOP{}ASDFGHJKL:"ZXCVBNM<>?
+            йцукенгшщзхъфывапролджэячсмитьбю.ЙЦУКЕНГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИТЬБЮ,""")
+
+    start = time.time()
+    update_console(console, text_, target_text_, start, SPM_)
+
+    while True:
+        pressedKey = msvcrt.getwch()
+        if pressedKey.encode("utf-8") == b'\x03':  # ctrl + c
+            sys.exit()
+        elif pressedKey.encode("utf-8") == b'\r':  # enter
+            if target_text_ == text_:
+                SPM_ = calculate_SPM(target_text_, time.time() - start)
+                update_console(console, text_, target_text_, start, SPM_)
+                break
+        elif pressedKey.encode("utf-8") == b'\b':  # backspace
+            text_ = text_[:-1]
+            update_console(console, text_, target_text_, start, SPM_)
+        else:
+            if pressedKey in layout:
+                text_ += pressedKey
+                update_console(console, text_, target_text_, start, SPM_)
 
 
-def get_color_for_accuracy(accuracy: int) -> str:
-    """
-    return color for border for accuracy
-    :return: border coolor
-    """
-    if accuracy == 100:
-        return "blue"
-    if accuracy > 90:
-        return "green"
-    if accuracy > 60:
-        return "yellow"
-    return "red"
-
-
-def add_pressed_keys_to_text(e):
-    """
-    asynс func for work with console write
-    """
-
-    global target_text_, inp_text_
-
-    if e.event_type == "down":
-
-        if len(e.name) == 1:
-            inp_text_ += e.name
-            update_console(target_text_, inp_text_)
-
-        elif e.name == "space":
-            inp_text_ += " "
-            update_console(target_text_, inp_text_)
-
-        elif e.name == 'backspace':
-            inp_text_ = inp_text_[:-1]
-            update_console(target_text_, inp_text_)
+def pause(console):
+    console.print("\npress ENTER for next set of words")
+    while True:
+        pressedKey = msvcrt.getwch()
+        if pressedKey.encode("utf-8") == b'\r':  # enter
+            break
 
 
 def create_parser() -> argparse.ArgumentParser:
@@ -95,38 +92,11 @@ def load_text_from_file(namespace) -> list:
 def main():
     parser = create_parser()
     perfect_text_list = load_text_from_file(parser.parse_args())
-    keyboard.hook(add_pressed_keys_to_text)
+    console = Console()
 
-    global target_text_, inp_text_
-
-    for target_text in perfect_text_list:
-        target_text = target_text[:-1]
-
-        update_console(target_text, inp_text_)
-
-        start_time = time.time()
-        target_text_ = target_text
-
-        keyboard.wait("enter")
-
-        fin_time = time.time() - start_time
-
-        SPM = calculate_symbol_per_minute(target_text, fin_time)
-        accuracy = calculate_accuracy(target_text, inp_text_)
-
-        console.print(
-            Panel.fit(
-                f"time = {fin_time}\n"
-                f"Symbol per second {SPM}\n"
-                f"accuracy {accuracy}%",
-                border_style=get_color_for_accuracy(accuracy)))
-
-        inp_text_ = ""
-
-        print('press "enter" for exit')
-        keyboard.wait("enter")
-
-        system("cls")
+    for target_text_ in perfect_text_list:
+        speed_measurement(console, target_text_[:-1])
+        pause(console)
 
 
 if __name__ == '__main__':
